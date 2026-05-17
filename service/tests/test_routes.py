@@ -4,7 +4,7 @@ import unittest
 from service import app
 from service.common import status
 from service.models import db, Product
-from tests.factories import ProductFactory
+from service.tests.factories import ProductFactory
 
 DATABASE_URI = os.getenv("DATABASE_URI", "sqlite:///../development.db")
 BASE_URL = "/products"

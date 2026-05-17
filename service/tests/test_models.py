@@ -3,7 +3,7 @@ import logging
 import unittest
 from service import app
 from service.models import Product, Category, db
-from tests.factories import ProductFactory
+from service.tests.factories import ProductFactory
 
 DATABASE_URI = os.getenv("DATABASE_URI", "sqlite:///../development.db")
 
