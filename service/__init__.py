@@ -1,23 +1,22 @@
 import os
+import sys
 import logging
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask_talisman import Talisman
+from flask_cors import CORS
+from service.utils import log_handlers
 
-# Inisialisasi Aplikasi Flask
+# Initialize Flask Application
 app = Flask(__name__)
+app.config.from_object("config")
 
-# Konfigurasi Database standar (menggunakan SQLite untuk lokal)
-DATABASE_URI = os.getenv("DATABASE_URI", "sqlite:///../development.db")
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URI
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SECRET_KEY"] = "secret-agile-key"
+# Initialize Application Security
+talisman = Talisman(app, force_https=False)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-# Inisialisasi SQLAlchemy Ekstensi
-db = SQLAlchemy(app)
+# Dependencies setup and logging routing
+log_handlers.init_logging(app, "gunicorn.error")
+app.logger.info("Service initialized successfully with Talisman and CORS headers security configuration.")
 
-# Atur Logging tingkat info untuk pelacakan REST API
-app.logger.setLevel(logging.INFO)
-app.logger.info("Initializing Product Service...")
-
-# Import routes dan models di paling bawah untuk menghindari circular import
+# Import routes after app initialization to avoid circular import issues
 from service import routes, models
