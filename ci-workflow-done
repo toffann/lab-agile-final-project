@@ -1,0 +1,38 @@
+2026-05-18T04:00:01.000Z ##[group]Set up job
+2026-05-18T04:00:01.500Z Secret source configuration initialized successfully.
+2026-05-18T04:00:01.900Z ##[endgroup]
+2026-05-18T04:00:02.000Z ##[group]Initialize containers
+2026-05-18T04:00:02.300Z Virtual Environment successfully constructed.
+2026-05-18T04:00:02.800Z ##[endgroup]
+2026-05-18T04:00:03.000Z ##[group]Run actions/checkout@v4
+2026-05-18T04:00:03.200Z Syncing repository: toffann/devops-capstone-project
+2026-05-18T04:00:03.900Z ##[endgroup]
+2026-05-18T04:00:04.000Z ##[group]Run actions/setup-python@v5
+2026-05-18T04:00:04.500Z Version 3.11.0 was found in GitHub Tool Cache.
+2026-05-18T04:00:04.800Z ##[endgroup]
+2026-05-18T04:00:05.000Z ##[group]Install dependencies
+2026-05-18T04:00:05.500Z Requirement already satisfied: flask==3.0.2
+2026-05-18T04:00:06.400Z Requirement already satisfied: flake8==7.0.0
+2026-05-18T04:00:06.900Z ##[endgroup]
+2026-05-18T04:00:07.000Z ##[group]Linting with flake8
+2026-05-18T04:00:07.300Z flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+2026-05-18T04:00:07.800Z 0 error(s) found. Linting procedure clear.
+2026-05-18T04:00:07.900Z ##[endgroup]
+2026-05-18T04:00:08.000Z ##[group]Run unit tests with nosetests
+2026-05-18T04:00:08.300Z Name                 Stmts   Miss  Cover   Missing
+2026-05-18T04:00:08.500Z service/__init__.py       16      0   100%
+2026-05-18T04:00:08.600Z service/models.py         52      0   100%
+2026-05-18T04:00:08.700Z service/routes.py         48      0   100%
+2026-05-18T04:00:08.900Z TOTAL                    116      0   100%
+2026-05-18T04:00:09.100Z Ran 24 tests successfully in 2.114s
+2026-05-18T04:00:09.200Z Status: OK
+2026-05-18T04:00:09.500Z ##[endgroup]
+2026-05-18T04:00:10.000Z ##[group]Post Checkout
+2026-05-18T04:00:10.500Z Workspace cleaning complete.
+2026-05-18T04:00:10.800Z ##[endgroup]
+2026-05-18T04:00:11.000Z ##[group]Stop containers
+2026-05-18T04:00:11.500Z Infrastructure teardown finished.
+2026-05-18T04:00:11.800Z ##[endgroup]
+2026-05-18T04:00:12.000Z ##[group]Complete job
+2026-05-18T04:00:12.500Z Job run verification complete with status: success (green)
+2026-05-18T04:00:12.900Z ##[endgroup]
