@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Pembuatan user non-root demi keamanan klaster sesuai instruksi uji IBM
+# Menambahkan user non-root demi standardisasi keamanan sistem IBM
 RUN useradd -u 1001 -r -g 0 -d /app -s /sbin/nologin -c "Default Application User" appuser
 
 WORKDIR /app
