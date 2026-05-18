@@ -1,22 +1,32 @@
+"""
+Service Package
+"""
 import os
-import sys
-import logging
 from flask import Flask
 from flask_talisman import Talisman
-from flask_cors import CORS
-from service.utils import log_handlers
 
-# Initialize Flask Application
+# Initialize Flask app
 app = Flask(__name__)
-app.config.from_object("config")
 
-# Initialize Application Security
-talisman = Talisman(app, force_https=False)
-CORS(app, resources={r"/*": {"origins": "*"}})
+# Intitialize Talisman for security headers
+talisman = Talisman(app,
+                    content_security_policy={
+                        'default-src': '\'self\''
+                    },
+                    referrer_policy='no-referrer'
+                    )
 
-# Dependencies setup and logging routing
-log_handlers.init_logging(app, "gunicorn.error")
-app.logger.info("Service initialized successfully with Talisman and CORS headers security configuration.")
-
-# Import routes after app initialization to avoid circular import issues
+# Import the routes after the Flask app is created
 from service import routes, models
+from service.models import Account
+
+# Define routes for internal health checking
+@app.route('/health', methods=['GET'])
+def health():
+    """Service health check"""
+    return {"status": "OK"}, 200
+
+# Set up database
+models.init_db(app)
+
+app.logger.info("Service initialized")
